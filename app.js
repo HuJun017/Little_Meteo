@@ -10,6 +10,7 @@ var min = document.querySelector('.min');
 var mid = document.querySelector('.mid');
 var button= document.querySelector('.submit');
 var weatherIcon = document.getElementById('weatherIcon');
+var humidity = document.querySelector('.humidity');
 
 button.addEventListener('click', function(name){
 fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+","+country.value+'&appid=50a7aa80fa492fa92e874d23ad061374&units=metric')
@@ -25,19 +26,21 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+","+count
   var maxValue = data['main']['temp_max'];
   var minValue = data['main']['temp_min'];
   var midValue = ((data['main']['temp_max'] + data['main']['temp_min']) / 2).toFixed(1);
+  var humidityValue = data['main']['humidity'];
+  
 
   main.innerHTML = nameValue+", "+ countryValue;
-  desc.innerHTML = "Desc - "+descValue;
-  temp.innerHTML = "Temp - "+tempValue;
+  desc.innerHTML = "Desc: "+descValue;
+  temp.innerHTML = "Temp: "+tempValue;
   weatherIcon.src = "https://openweathermap.org/img/wn/"+weatherIconValue+"@2x.png";
-  wind.innerHTML = "Wind Speed - "+windValue+" km/h";
-  max.innerHTML = "Maximum Temperature - "+maxValue;
-  min.innerHTML = "Minmum Temperature - "+minValue;
-  mid.innerHTML = "Medium Temperature - "+midValue;
+  wind.innerHTML = "Wind Speed: "+windValue+" km/h";
+  max.innerHTML = "Maximum Temperature: "+maxValue;
+  min.innerHTML = "Minmum Temperature: "+minValue;
+  mid.innerHTML = "Medium Temperature: "+midValue;
+  humidity.innerHTML = "Humidity: "+humidityValue+" g/m3";
   input.value ="";
   country.value = "";
 })
 
 .catch(err => alert("Nome della città inesistente"));
 })
-
