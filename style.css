@@ -1,70 +1,104 @@
-*{
-  margin:0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+  font-family: "Nunito", sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  min-height: 100vh;
 }
 
-body{
-  font-family: "Nunito",sans-serif;
-  background: #f8f8f8;
+/* Search button pulse on hover */
+.submit {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
 }
 
-.input{
-  text-align: center;
-  margin: 100px auto;
-  margin-bottom: 5px;
-}
-
-input[type="submit"]{
-  margin-bottom: 5px;
-  padding: 15px 30px;
-  background: #e7e7e7;
+/* Card entrance animation */
+.weather-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
   border: none;
-  border-radius: 1px;
-  font-family: "Nunito",sans-serif;
-  font-weight:bold;
-  font-size: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
 }
-.input input[type="text"]{
-  margin-bottom: 5px;
-  width: 600px;
-  height: 55px;
-  padding: 5px 10px;
-  background: #e7e7e7;
-  border: none;
-  border-radius: 1px;
-  font-family: "Nunito",sans-serif;
-  font-weight:bold;
-  font-size: 20px;
+.weather-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+.weather-card.card-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.card{
-  width: 50%;
-  background: #e7e7e7;
-  height: 40vh;
-  margin: 50px auto;
-  border-radius: 2px;
+/* Card collapse */
+.card-content {
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+.card-content.collapsed {
+  max-height: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0;
 }
 
-
-.close{
-  float: right;
-  margin-top: -2px;
-  cursor: pointer;
-  margin-right: 20px;
+/* Card dismiss animation */
+@keyframes card-out {
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
+.card-hiding {
+  animation: card-out 0.3s ease forwards;
 }
 
-.card h1{
-  padding: 5px 0;
-  text-align: center;
+/* Weather icon bounce */
+.weather-icon {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
 }
 
-.card p{
-  text-align: center;
-  margin:40px 0;
-  font-size:20px;
+/* Spinner */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
 }
-.UpdateButton {
-  display: none;
-  border: 0px;
+
+/* Layout transition */
+@keyframes search-center-out {
+  to { opacity: 0; transform: translateY(-16px); }
+}
+.search-center-out {
+  animation: search-center-out 0.35s ease forwards;
+}
+
+@keyframes col-left-in {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes col-right-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.main-row-in #left-col  { animation: col-left-in  0.5s ease 0.1s both; }
+.main-row-in #right-col { animation: col-right-in 0.5s ease 0.25s both; }
+
+/* Map */
+#map {
+  height: 520px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+#map-section {
+  position: sticky;
+  top: 20px;
 }
